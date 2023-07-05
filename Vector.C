@@ -105,7 +105,7 @@ class Vector
             return objects[index];
         }
 
-        bool emtpy() const // accesor
+        bool empty() const // accesor
         {
             return size() == 0;
         }
@@ -137,13 +137,21 @@ class Vector
         void pop_back() //delete the last item of vector
         {
             if (theSize == 0)
-                std::cout << "the size of the vector is 0!" << std::endl;
-            else 
+            {
+                std::cout << "Error at 'pop_back' : the size of the vector is 0!" << std::endl;
+                exit(1);
+            }
+            else
                 --theSize;
         }
 
         const Object & back () const // accessor and the return type is const
         {
+            if (theSize == 0)
+            {
+                std::cout << "Error at back : the size of the vector is 0!" << std::endl;
+                exit(1);
+            }
             return objects[theSize -1];
         }
 
@@ -152,12 +160,12 @@ class Vector
 
         iterator begin()
         {
-            return objects;
+            return &objects[0];
         }
 
         const_iterator begin() const
         {
-            return objects;
+            return objects[0];
         }
 
         iterator end()
@@ -187,13 +195,13 @@ int main()
     v1.push_back(3);
 
     Vector<int> v2;
-    v2.push_back(3);
     v2.push_back(4);
     v2.push_back(5);
+    v2.push_back(6);
 
     // Vector<int> v3 = v1; // copy constructor; 
-    Vector<int> v4;  // constructor
-    v4 = v2; //copy assignment, copy constructor, move constructor, move assignment, move assignement ??????
+    // Vector<int> v4;  // constructor
+    // v4 = v2; //copy assignment, copy constructor, move constructor, move assignment, move assignement ??????
 
     // Vector<int> v5 = std::move(v1); //move constructor
     // Vector<int> v6; // constructor
@@ -204,10 +212,46 @@ int main()
     // std::cout << "emtpy-ness of vec: " << v1.emtpy() <<std::endl;
     // std::cout << "capacity of vec: " << v1.capacity() <<std::endl;
 
-    for(auto k = v4.begin() ; k < v4.end(); ++k)
+    for(auto k = v1.begin() ; k < v1.end(); ++k)
         std::cout << *k <<std::endl;
-    
 
-    // return 0;
+    printf("\n");
+    int back_= v1.back();
+    std::cout << back_ << std::endl;
+
+    std::cout << "size : " << v1.size() <<std::endl;
+
+    for(int i = v1.size(); i>0; --i){
+        v1.pop_back();
+        std::cout<<"i = "<<i<<std::endl;
+    }
+    std::cout << "size : " << v1.size() <<std::endl;
+
+    if(v1.size() !=0)
+        for(auto k = v1.begin() ; k < v1.end(); ++k)
+            std::cout << *k <<std::endl;
+
+    printf("\n\n");
+    std::cout<<"v2"<<std::endl;
+    if(v2.size() !=0)
+    {
+        std::cout<<"print v2"<< std::endl;
+        for(auto k = v2.begin() ; k < v2.end(); ++k)
+            std::cout << *k <<std::endl;
+    }
+
+    while(!v2.empty())
+    {
+        v2.pop_back();
+    }
+
+    if(v2.size() !=0)
+    {
+        std::cout<<"print v2"<< std::endl;
+        for(auto k = v2.begin() ; k < v2.end(); ++k)
+            std::cout << *k <<std::endl;
+    }
+
+    return 0;
 
 }
