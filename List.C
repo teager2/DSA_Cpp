@@ -190,28 +190,12 @@ class List
 
                 void assertIsValid() const // inherited from const_iterator, but i should makr it const? why?
                 {
-                    if(this->theList == nullptr)
+                    if(this->theList == nullptr ||this->current == nullptr||this->current == this->theList->head)
                     {
-                        std::cout << "iterator1";
                         std::cout << "Iterator or List not Valid" << std::endl;
                         exit(1);
                         // throw IteratorOutofBoundsException{};
                     }
-                    if(this->current == nullptr )
-                    {
-                        std::cout << "iterator2";
-                        std::cout << "Iterator or List not Valid" << std::endl;
-                        exit(1);
-                        // throw IteratorOutofBoundsException{};
-                    }
-                    if(this->current == this->theList->head)
-                    {
-                        std::cout << "iterator3";
-                        std::cout << "Iterator or List not Valid" << std::endl;
-                        exit(1);
-                        // throw IteratorOutofBoundsException{};
-                    }
-
                 }
 
                 friend class List<Object>;
